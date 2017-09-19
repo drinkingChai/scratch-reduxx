@@ -1,41 +1,37 @@
 import React, { Component } from 'react'
-import './random'
+// import './random'
 
-const state = {
-  count : 0
+const count = (state = 0, action)=> {
+  if (action && action.type == 'INCREMENT') return ++state
+  else if (action && action.type == 'DECREMENT') return --state
+  return state
 }
 
-function count(state = 0, action) {
-  switch (state) {
-    case 'INCREMENT':
-      return state += 1
-    case 'DECREMENT':
-      return state -= 1
-    default:
-      return state
-  }
-}
-
-function countApp(state = {}, action) {
+const appState = (state = {}, action)=> {
   return {
     count: count(state.count, action)
   }
 }
-    
+
+  
 
 
 class App extends Component {
   constructor() {
     super()
-    this.state = state 
+    this.state = appState() 
     this.upvote = this.upvote.bind(this)
     this.downvote = this.downvote.bind(this)
   }
 
   upvote() {
+    const newState = appState(this.state, { type: 'INCREMENT' })
+    this.setState(newState)
   }
 
   downvote() {
+    const newState = appState(this.state, { type: 'DECREMENT' })
+    this.setState(newState)
   }
 
   render() {

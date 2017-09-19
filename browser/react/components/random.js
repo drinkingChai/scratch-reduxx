@@ -1,6 +1,6 @@
-const appState = {
+/* const appState = {
   count: 0
-}
+}*/
 
 const count = (state = 0, action)=> {
   if (action && action.type == 'INCREMENT') return ++state
